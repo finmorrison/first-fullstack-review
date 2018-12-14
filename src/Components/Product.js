@@ -23,8 +23,8 @@ export default class Product extends Component {
   };
   saveEdit = () => {
     const { name, description, price, image } = this.state;
-    const {id} = this.props
-    this.props.saveEdit(id, {name, description, price, image});
+    const { id } = this.props
+    this.props.saveEdit(id, { name, description, price, image });
     this.editToggle();
   };
   render() {
@@ -33,26 +33,26 @@ export default class Product extends Component {
         <img src={this.props.image} alt="product" />
         <div className="productInfo">
           {this.state.edit ? (
-              <>
-              <span>Name: </span>
-              <input value={this.state.name} onChange={(e) => this.handleChange('name', e.target.value)} type="text"/><br/>
-              <span>Description: </span>
-              <input value={this.state.description} onChange={(e) => this.handleChange('description', e.target.value)}type="text"/><br/>
-              <span>Price</span>
-              <input value={this.state.price} onChange={(e) => this.handleChange('price', e.target.value)}type="text"/><br/>
-              <span>Image URL: </span>
-              <input value={this.state.image} onChange={(e) => this.handleChange('image', e.target.value)}type="text"/><br/>
-            <button style={{marginTop: '36px'}}onClick={this.saveEdit}>Save</button>
-              </>
-          ) : (
             <>
-              <h4>{this.props.name}</h4>
-              <p>{this.props.description}</p>
-              <p>${this.props.price}</p>
-              <button onClick={this.editToggle}>Edit</button>
-              <button>Delete</button>
+              <span>Name: </span>
+              <input value={this.state.name} onChange={(e) => this.handleChange('name', e.target.value)} type="text" /><br />
+              <span>Description: </span>
+              <input value={this.state.description} onChange={(e) => this.handleChange('description', e.target.value)} type="text" /><br />
+              <span>Price</span>
+              <input value={this.state.price} onChange={(e) => this.handleChange('price', e.target.value)} type="text" /><br />
+              <span>Image URL: </span>
+              <input value={this.state.image} onChange={(e) => this.handleChange('image', e.target.value)} type="text" /><br />
+              <button style={{ marginTop: '36px' }} onClick={this.saveEdit}>Save</button>
             </>
-          )}
+          ) : (
+              <>
+                <h4>{this.props.name}</h4>
+                <p>{this.props.description}</p>
+                <p>${this.props.price}</p>
+                <button onClick={this.editToggle}>Edit</button>
+                <button onClick ={this.props.deleteItem}>Delete</button>
+              </>
+            )}
         </div>
       </div>
     );

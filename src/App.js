@@ -27,18 +27,25 @@ class App extends Component {
     });
   };
   addItem = () => {
-    const {name, description, price, image} = this.state
-    axios.post('/api/product', {name, description, price, image}).then(res => {
+    const { name, description, price, image } = this.state
+    axios.post('/api/product', { name, description, price, image }).then(res => {
       console.log(res.data)
-      this.setState({products: res.data})
+      this.setState({ products: res.data })
     })
   }
-  saveEdit = (id, body) => {
-    
+  saveEdit = (id, obj) => {
+    const { name, description, price, image } = obj
+    axios.put(`/api/product/${id}`, { name, description, price, image }).then((res) => {
+      this.setState({products: res.data})
+     })
   };
 
   deleteItem = (id) => {
-
+    axios.delete(`/api/product/${id}`).then(res=>{
+      this.setState({
+        products: res.data
+      })
+    })
   }
   render() {
     console.log(this.state);
@@ -58,7 +65,7 @@ class App extends Component {
     });
     return (
       <div className="App">
-        <AddProduct handleChange={this.handleChange} addItem={this.addItem}/>
+        <AddProduct handleChange={this.handleChange} addItem={this.addItem} />
         {productList}
       </div>
     );
